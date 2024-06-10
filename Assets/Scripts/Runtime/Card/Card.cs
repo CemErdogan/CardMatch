@@ -1,26 +1,24 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Card : MonoBehaviour
 {
-    private void Awake()
+    [SerializeField] private Transform context;
+
+    public void Prepare()
     {
-        Debug.Log("Awake");
+        
     }
 
-    private void OnEnable()
+    public void Select()
     {
-        Debug.Log("OnEnable");
+        transform.eulerAngles = new Vector3(0, 0, 0);
     }
 
-    void Start()
+    public void Deselect()
     {
-        Debug.Log("Start");
-    }
-
-    void Update()
-    {
-        Debug.Log("Update");
+        transform.eulerAngles = new Vector3(0, 180, 0);
     }
 }
