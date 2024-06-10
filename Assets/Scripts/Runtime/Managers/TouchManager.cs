@@ -5,17 +5,22 @@ using UnityEngine;
 public class TouchManager : MonoBehaviour
 {
     [SerializeField] Camera cam;
+    [SerializeField] string collisionTag;
 
     void Update()
     {
-        GetTouch();
+        GetTouch(Input.mousePosition);
     }
 
-    private void GetTouch()
+    private void GetTouch(Vector3 pos)
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Touch Down");
+            var hit = Physics2D.OverlapPoint(cam.ScreenToWorldPoint(pos)) as BoxCollider2D;
+            if (hit != null && hit.CompareTag(collisionTag))
+            {
+                Debug.Log(hit.gameObject.name);
+            }
         }
     }
 }
