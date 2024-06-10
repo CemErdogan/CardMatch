@@ -19,7 +19,7 @@ public class TouchManager : MonoBehaviour
             var hit = Physics2D.OverlapPoint(cam.ScreenToWorldPoint(pos)) as BoxCollider2D;
             if (hit != null && hit.CompareTag(collisionTag))
             {
-                Debug.Log(hit.gameObject.name);
+                Debug.Log(hit.gameObject.name, hit.gameObject);
             }
         }
     }
