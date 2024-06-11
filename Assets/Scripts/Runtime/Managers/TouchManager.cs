@@ -6,6 +6,7 @@ public class TouchManager : MonoBehaviour
 {
     [SerializeField] Camera cam;
     [SerializeField] string collisionTag;
+    public Card CurrentCard;
 
     void Update()
     {
@@ -19,7 +20,11 @@ public class TouchManager : MonoBehaviour
             var hit = Physics2D.OverlapPoint(cam.ScreenToWorldPoint(pos));
             if (CanTouch(hit))
             {
-                Debug.Log(hit.gameObject.name, hit.gameObject);
+                CurrentCard = hit.gameObject.GetComponent<Card>();
+            }
+            else
+            {
+                CurrentCard = null;
             }
         }
     }
