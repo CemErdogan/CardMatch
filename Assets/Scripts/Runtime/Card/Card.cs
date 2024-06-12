@@ -14,11 +14,13 @@ public class Card : MonoBehaviour
 
     public void Select()
     {
+        Debug.Log("Select");
         transform.eulerAngles = new Vector3(0, 0, 0);
     }
 
     public void Deselect()
     {
+        Debug.Log("Deselect");
         transform.eulerAngles = new Vector3(0, 180, 0);
     }
 }

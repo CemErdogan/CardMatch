@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TouchManager : MonoBehaviour
 {
     [SerializeField] Camera cam;
     [SerializeField] string collisionTag;
-    public Card CurrentCard;
 
     void Update()
     {
@@ -20,11 +17,12 @@ public class TouchManager : MonoBehaviour
             var hit = Physics2D.OverlapPoint(cam.ScreenToWorldPoint(pos));
             if (CanTouch(hit))
             {
-                CurrentCard = hit.gameObject.GetComponent<Card>();
+                var selectedCard = hit.gameObject.GetComponent<Card>();
+                TouchEvents.OnCardTapped?.Invoke(selectedCard);
             }
             else
             {
-                CurrentCard = null;
+                TouchEvents.OnEmptyTapped?.Invoke();
             }
         }
     }
