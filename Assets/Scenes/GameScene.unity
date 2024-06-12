@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 183917281}
   - component: {fileID: 183917282}
   m_Layer: 0
-  m_Name: CardManager
+  m_Name: MatchAbility
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
