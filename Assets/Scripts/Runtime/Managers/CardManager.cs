@@ -3,7 +3,7 @@ using UnityEngine;
 public class CardManager : MonoBehaviour
 {
     [SerializeField] CardFactory cardFactory;
-    [SerializeField] float cellSize;
+    [SerializeField] LevelData levelData;
     Card[,] _cards;
 
     private void Awake()
@@ -13,11 +13,11 @@ public class CardManager : MonoBehaviour
 
     void PrepareCards()
     {
-        for(int x = 0; x <= 5; x++)
+        for(int x = 0; x <= levelData.amount.x; x++)
         {
-            for (int y = 0; y <= 5; y++)
+            for (int y = 0; y <= levelData.amount.y; y++)
             {
-                cardFactory.CreateCard(GetWorldPosition(x, y, cellSize));
+                cardFactory.CreateCard(GetWorldPosition(x, y, levelData.cellSize));
             }
         }
     }
