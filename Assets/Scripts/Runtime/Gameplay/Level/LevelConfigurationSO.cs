@@ -7,4 +7,6 @@ using UnityEngine;
 public class LevelConfigurationSO : ScriptableObject
 {
     public LevelData[] levelData;
+
+
 }

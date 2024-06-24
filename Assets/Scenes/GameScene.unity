@@ -657,9 +657,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardFactory: {fileID: 598182413}
-  levelData:
-    amount: {x: 5, y: 4}
-    cellSize: 10
+  levelDataSO: {fileID: 11400000, guid: b5f7fd06e89a44f2ca89eefca7d16a7b, type: 2}
 --- !u!1 &1763236662
 GameObject:
   m_ObjectHideFlags: 0
