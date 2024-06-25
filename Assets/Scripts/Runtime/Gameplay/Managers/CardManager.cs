@@ -17,13 +17,17 @@ public class CardManager : MonoBehaviour
 
     void PrepareCards(LevelData levelData)
     {
-        for(int x = 0; x < levelData.amount.x; x++)
+        _cards = new Card[levelData.amount.x, levelData.amount.y];
+
+        for (int x = 0; x < levelData.amount.x; x++)
         {
             for (int y = 0; y < levelData.amount.y; y++)
             {
-                cardFactory.CreateCard(GetWorldPosition(x, y, levelData.cellSize));
+                _cards[x, y] = cardFactory.CreateCard(GetWorldPosition(x, y, levelData.cellSize));
             }
         }
+
+        CardEvents.OnCardsPrepared?.Invoke(_cards);
     }
 
     Vector3 GetWorldPosition(int x, int y, float cellSize)
