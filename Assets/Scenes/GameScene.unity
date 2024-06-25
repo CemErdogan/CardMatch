@@ -385,6 +385,7 @@ GameObject:
   m_Component:
   - component: {fileID: 361157299}
   - component: {fileID: 361157300}
+  - component: {fileID: 361157301}
   m_Layer: 0
   m_Name: CameraHandler
   m_TagString: Untagged
@@ -420,6 +421,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vCam: {fileID: 646965745}
+  targetGroup: {fileID: 361157301}
+  weight: 4
+  offset: 4
+--- !u!114 &361157301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 361157298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5eb80d8e62d9d145bb50fb783c0f731, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PositionMode: 0
+  m_RotationMode: 0
+  m_UpdateMethod: 2
+  m_Targets: []
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -712,8 +732,8 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 0}
+  m_LookAt: {fileID: 361157299}
+  m_Follow: {fileID: 361157299}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 14.24
