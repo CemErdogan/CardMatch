@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Card : MonoBehaviour
@@ -11,17 +8,21 @@ public class Card : MonoBehaviour
     public void Prepare(int id)
     {
         ID = id;
+        Close();
     }
 
     public void Select()
     {
-        Debug.Log("Select");
-        transform.eulerAngles = new Vector3(0, 0, 0);
+        transform.eulerAngles = CardConstants.OpenRotaion;
     }
 
     public void Deselect()
     {
-        Debug.Log("Deselect");
-        transform.eulerAngles = new Vector3(0, 180, 0);
+        transform.eulerAngles = CardConstants.CloseRotaion;
+    }
+
+    void Close()
+    {
+        transform.eulerAngles = CardConstants.CloseRotaion;
     }
 }
