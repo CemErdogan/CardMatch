@@ -63,9 +63,14 @@ public class Card : MonoBehaviour
             .SetId(context);
     }
 
+    public bool IsAnimating()
+    {
+        return DOTween.IsTweening(context);
+    }
+
     void Close()
     {
-        transform.DORotate(CardConstants.CloseRotaion, CardConstants.CardDelayDuration)
+        context.DORotate(CardConstants.CloseRotaion, CardConstants.CardDelayDuration)
             .SetEase(Ease.OutBack)
             .SetDelay(1f);
     }
