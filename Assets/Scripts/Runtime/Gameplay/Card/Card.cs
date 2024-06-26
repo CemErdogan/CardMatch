@@ -17,20 +17,34 @@ public class Card : MonoBehaviour
         Close();
     }
 
+    private void OnDestroy()
+    {
+        DOTween.Kill(context);
+    }
+
     public void Select()
     {
-        transform.DORotate(CardConstants.OpenRotaion, 1f);
+        DOTween.Sequence()
+            .Append(context.DOScale(1.5f, CardConstants.CardAnimationDuration)
+                .SetEase(Ease.OutBack))
+            .Join(context.DORotate(CardConstants.OpenRotaion, CardConstants.CardAnimationDuration)
+                .SetEase(Ease.OutSine))
+            .SetId(context);
     }
 
     public void Deselect()
     {
-        transform.DORotate(CardConstants.CloseRotaion, 1f);
+        DOTween.Sequence()
+            .Append(context.DOScale(1f, CardConstants.CardAnimationDuration)
+                .SetEase(Ease.InBack))
+            .Join(context.DORotate(CardConstants.CloseRotaion, CardConstants.CardAnimationDuration)
+                .SetEase(Ease.InSine))
+            .SetId(context);
     }
 
     void Close()
     {
-        Debug.Log("Close");
-        transform.DORotate(CardConstants.CloseRotaion, 1f)
+        transform.DORotate(CardConstants.CloseRotaion, CardConstants.CardDelayDuration)
             .SetEase(Ease.OutBack)
             .SetDelay(1f);
     }
