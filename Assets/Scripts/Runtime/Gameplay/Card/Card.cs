@@ -21,6 +21,17 @@ public class Card : MonoBehaviour
     private void OnDestroy()
     {
         DOTween.Kill(context);
+        DOTween.Kill(transform);
+    }
+
+    public void Move(Vector3 targetPos)
+    {
+        DOTween.Sequence()
+            .Append(transform.DOMove(targetPos, CardConstants.CardAnimationDuration)
+                .SetEase(Ease.InBack))
+            .Append(transform.DOScale(0, CardConstants.CardAnimationDuration)
+                .SetEase(Ease.InBack))
+            .SetId(transform);
     }
 
     [Button]

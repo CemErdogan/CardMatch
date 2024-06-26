@@ -1,12 +1,17 @@
-using System;
 using UnityEngine;
 using System.Collections.Generic;
 
 public class MatchAbility : MonoBehaviour
 {
     private Card _currentCard;
+    Camera _camera;
     List<Card> _selectedCards = new();
-    
+
+    private void Awake()
+    {
+        _camera = Camera.main;
+    }
+
     void OnEnable()
     {
         TouchEvents.OnCardTapped += CardTapped_Callback;
@@ -28,7 +33,7 @@ public class MatchAbility : MonoBehaviour
 
         if (IsSelectedCardsSame())
         {
-            // correct match
+            CorrectMatch(_selectedCards);
         }
         else
         {
@@ -41,6 +46,17 @@ public class MatchAbility : MonoBehaviour
         _selectedCards.Clear();
     }
 
+    void CorrectMatch(List<Card> selectedCards)
+    {
+        foreach(var card in selectedCards)
+        {
+            var targetPos = _camera.ViewportToWorldPoint(
+                new Vector3(0.5f, 0.5f, _camera.nearClipPlane));
+
+            card.Move(targetPos);
+        }
+    }
+
     bool IsSelectedCardsSame()
     {
         return _selectedCards[0].ID == _selectedCards[1].ID;
@@ -50,6 +66,9 @@ public class MatchAbility : MonoBehaviour
     {
         _currentCard = card;
         _currentCard.Select();
+
+        _selectedCards.Add(card);
+        TryMatch();
     }
 
     private void EmptyTapped_Callback()
