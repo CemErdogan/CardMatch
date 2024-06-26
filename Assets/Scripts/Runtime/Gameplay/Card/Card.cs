@@ -1,4 +1,5 @@
 using UnityEngine;
+using DG.Tweening;
 
 public class Card : MonoBehaviour
 {
@@ -11,18 +12,26 @@ public class Card : MonoBehaviour
         Close();
     }
 
+    private void Start()
+    {
+        Close();
+    }
+
     public void Select()
     {
-        transform.eulerAngles = CardConstants.OpenRotaion;
+        transform.DORotate(CardConstants.OpenRotaion, 1f);
     }
 
     public void Deselect()
     {
-        transform.eulerAngles = CardConstants.CloseRotaion;
+        transform.DORotate(CardConstants.CloseRotaion, 1f);
     }
 
     void Close()
     {
-        transform.eulerAngles = CardConstants.CloseRotaion;
+        Debug.Log("Close");
+        transform.DORotate(CardConstants.CloseRotaion, 1f)
+            .SetEase(Ease.OutBack)
+            .SetDelay(1f);
     }
 }
