@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using NaughtyAttributes;
 
 public class Card : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class Card : MonoBehaviour
         DOTween.Kill(context);
     }
 
+    [Button]
     public void Select()
     {
         DOTween.Sequence()
@@ -32,6 +34,7 @@ public class Card : MonoBehaviour
             .SetId(context);
     }
 
+    [Button]
     public void Deselect()
     {
         DOTween.Sequence()
@@ -39,6 +42,24 @@ public class Card : MonoBehaviour
                 .SetEase(Ease.InBack))
             .Join(context.DORotate(CardConstants.CloseRotaion, CardConstants.CardAnimationDuration)
                 .SetEase(Ease.InSine))
+            .SetId(context);
+    }
+
+    [Button]
+    public void DelectWrong()
+    {
+        DOTween.Sequence()
+            .AppendInterval(CardConstants.CardAnimationDuration * 2)
+            .AppendCallback(()=> 
+            {
+                //todo: add sound
+            })
+            .Append(context.DOScale(1, CardConstants.CardAnimationDuration)
+                .SetEase(Ease.InBack)) 
+            .Join(context.DOShakeRotation(CardConstants.CardAnimationDuration, 30, 30, 35)
+                .SetEase(Ease.InOutQuad))
+            .Append(context.DORotate(CardConstants.CloseRotaion, CardConstants.CardAnimationDuration)
+                .SetEase(Ease.InBack))
             .SetId(context);
     }
 
