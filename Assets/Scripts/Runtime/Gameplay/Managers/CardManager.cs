@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CardManager : MonoBehaviour
@@ -18,17 +20,48 @@ public class CardManager : MonoBehaviour
 
     void PrepareCards(LevelData levelData)
     {
-        // card lib'ten random kartları al
+        var cardData = cardLib.CardDataList.ToList();
+        var data = new List<CardData>();
+        for (int i = 0; i < cardData.Count; i++)
+        {
+            var rndData = cardData.RemoveRandom();
+            data.Add(rndData);
+            data.Add(rndData);
+        }
         
         _cards = new Card[levelData.amount.x, levelData.amount.y];
-        
-        // random containera ekle (5 farklı akrt var ama 6 farklı karta ihtiyacımız vardı)
-        
-        // listeyi karıştır
-        
-        // cardları prepare
-        
 
+        if (data.Count < _cards.Length) 
+        {
+            while (_cards.Length != data.Count)
+            {
+                var rndData = cardLib.CardDataList.GetRandom();
+                data.Add(rndData);
+                data.Add(rndData);
+            }
+        }
+        else if (data.Count > _cards.Length)
+        {
+            while (_cards.Length != data.Count)
+            {
+                data.RemoveAt(data.Count - 1);
+                data.RemoveAt(data.Count - 1);
+            }
+        }
+
+        data.Shuffle();
+
+        var index = 0;
+        for (int x = 0; x < levelData.amount.x; x++)
+        {
+            for (int y = 0; y < levelData.amount.y; y++)
+            {
+                _cards[x, y] = cardFactory.CreateCard(GetWorldPosition(x, y, levelData.cellSize));
+                _cards[x, y].Prepare(data[index]);
+                index++;
+            }
+        }
+        
         CardEvents.OnCardsPrepared?.Invoke(_cards);
     }
 
