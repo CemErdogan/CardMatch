@@ -38,7 +38,7 @@ public class MatchAbility : MonoBehaviour
         {
             foreach (var card in _selectedCards)
             {
-                card.Deselect();
+                card.DelectWrong();
             }
         }
 
