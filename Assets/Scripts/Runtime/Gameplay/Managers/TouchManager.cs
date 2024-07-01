@@ -1,13 +1,33 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class TouchManager : MonoBehaviour
 {
     [SerializeField] Camera cam;
     [SerializeField] string collisionTag;
+    bool _canTouch;
+
+    void Start()
+    {
+        _canTouch = false;
+        StartCoroutine(WaitForTouch_Cor());
+    }
+    // vim motions
+    
+    IEnumerator WaitForTouch_Cor()
+    {
+        yield return new WaitForSeconds(1.5f);
+
+        _canTouch = true;
+    }
 
     void Update()
     {
-        GetTouch(Input.mousePosition);
+        if (_canTouch)
+        {
+            GetTouch(Input.mousePosition);
+        }
     }
     
     private void GetTouch(Vector3 pos)
@@ -31,4 +51,6 @@ public class TouchManager : MonoBehaviour
     {
         return hit != null && hit.CompareTag(collisionTag);
     }
+
+   
 }
