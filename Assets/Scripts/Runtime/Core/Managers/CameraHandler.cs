@@ -5,7 +5,8 @@ public class CameraHandler : MonoBehaviour
 {
     [SerializeField] CinemachineVirtualCamera vCam;
     [SerializeField] CinemachineTargetGroup targetGroup;
-    [SerializeField] float weight, offset;
+    [Range(1, 11), SerializeField] float weight = 4;
+    [Range(1, 11), SerializeField] float offset = 4;
 
     private void Awake()
     {
