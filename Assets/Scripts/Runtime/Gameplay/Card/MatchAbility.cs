@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 public class MatchAbility : MonoBehaviour
 {
-    private Card _currentCard;
     Camera _camera;
     List<Card> _selectedCards = new();
 
@@ -64,21 +63,18 @@ public class MatchAbility : MonoBehaviour
 
     private void CardTapped_Callback(Card card)
     {
-        _currentCard = card;
-        _currentCard.Select();
-
+        card.Select();
         _selectedCards.Add(card);
         TryMatch();
     }
 
     private void EmptyTapped_Callback()
     {
-        if (_currentCard == null)
+        foreach (var card in _selectedCards)
         {
-            return;
+            card.Deselect();
         }
-
-        _currentCard.Deselect();
-        _currentCard = null;
+        
+        _selectedCards.Clear();
     }
 }
