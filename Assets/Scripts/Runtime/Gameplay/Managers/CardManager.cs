@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class CardManager : MonoBehaviour
 {
+    [SerializeField] CardLib cardLib;
     [SerializeField] CardFactory cardFactory;
     Card[,] _cards;
 
@@ -17,15 +18,16 @@ public class CardManager : MonoBehaviour
 
     void PrepareCards(LevelData levelData)
     {
+        // card lib'ten random kartları al
+        
         _cards = new Card[levelData.amount.x, levelData.amount.y];
-
-        for (int x = 0; x < levelData.amount.x; x++)
-        {
-            for (int y = 0; y < levelData.amount.y; y++)
-            {
-                _cards[x, y] = cardFactory.CreateCard(GetWorldPosition(x, y, levelData.cellSize));
-            }
-        }
+        
+        // random containera ekle (5 farklı akrt var ama 6 farklı karta ihtiyacımız vardı)
+        
+        // listeyi karıştır
+        
+        // cardları prepare
+        
 
         CardEvents.OnCardsPrepared?.Invoke(_cards);
     }

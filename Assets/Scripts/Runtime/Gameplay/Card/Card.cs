@@ -5,11 +5,13 @@ using NaughtyAttributes;
 public class Card : MonoBehaviour
 {
     [SerializeField] private Transform context;
+    [SerializeField] CardVisual cardVisual;
     public int ID { get; private set; }
 
-    public void Prepare(int id)
+    public void Prepare(CardData cardData)
     {
-        ID = id;
+        ID = cardData.ID;
+        cardVisual.SetIcon(cardData.iconSprite);
         Close();
     }
 
