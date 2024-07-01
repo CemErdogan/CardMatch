@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using Cinemachine;
 
@@ -13,11 +15,23 @@ public class CameraHandler : MonoBehaviour
         CardEvents.OnCardsPrepared += Prepare_Callback;
     }
 
+    void Start()
+    {
+        StartCoroutine(WaitAndCloseTargetGroup_Cor());
+    }
+
     private void OnDestroy()
     {
         CardEvents.OnCardsPrepared -= Prepare_Callback;
     }
 
+    IEnumerator WaitAndCloseTargetGroup_Cor()
+    {
+        yield return null;
+
+        targetGroup.enabled = false;
+    }
+    
     void Prepare_Callback(Card[,] cards)
     {
         var count = cards.GetLength(0) * cards.GetLength(1);
@@ -55,4 +69,6 @@ public class CameraHandler : MonoBehaviour
             }
         }
     }
+
+   
 }

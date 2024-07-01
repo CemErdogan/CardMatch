@@ -13,7 +13,6 @@ public class TouchManager : MonoBehaviour
         _canTouch = false;
         StartCoroutine(WaitForTouch_Cor());
     }
-    // vim motions
     
     IEnumerator WaitForTouch_Cor()
     {

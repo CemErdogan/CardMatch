@@ -63,9 +63,17 @@ public class MatchAbility : MonoBehaviour
 
     private void CardTapped_Callback(Card card)
     {
-        card.Select();
-        _selectedCards.Add(card);
-        TryMatch();
+        if (IsCardAlreadySelected(card) == false)
+        {
+            card.Select();
+            _selectedCards.Add(card);
+            TryMatch(); 
+        }
+    }
+    
+    bool IsCardAlreadySelected(Card card)
+    {
+        return _selectedCards.Contains(card);
     }
 
     private void EmptyTapped_Callback()
@@ -77,4 +85,6 @@ public class MatchAbility : MonoBehaviour
         
         _selectedCards.Clear();
     }
+
+    
 }
